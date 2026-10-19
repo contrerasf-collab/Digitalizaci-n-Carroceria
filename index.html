@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller del Futuro | Digitalización</title>
+
+<style>
+:root{
+    --azul:#183153;
+    --azul-claro:#24558a;
+    --naranja:#ff7a00;
+    --gris:#f5f7fa;
+    --verde:#28a745;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:var(--gris);
+    color:#333;
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.1rem;
+    line-height:1.6;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:20px;
+    background:rgba(255,255,255,0.15);
+    padding:10px 20px;
+    border-radius:30px;
+}
+
+main{
+    max-width:1300px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.intro{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:40px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.intro h2{
+    color:var(--azul);
+    margin-bottom:15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    color:var(--azul);
+    margin-bottom:10px;
+}
+
+.icon{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.card p{
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    background:var(--naranja);
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.locked{
+    background:#cfd6de;
+    color:#555;
+}
+
+.estado{
+    margin-top:10px;
+    font-size:.9rem;
+    color:var(--verde);
+}
+
+footer{
+    margin-top:50px;
+    padding:30px;
+    text-align:center;
+    color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <h1>🚗 Taller del Futuro</h1>
+
+    <p>
+        Bienvenido al cuaderno digital de
+        <strong>Digitalización Aplicada a los Sectores Productivos</strong>.
+        Durante este curso descubrirás cómo la tecnología está transformando
+        los talleres de carrocería, desde la gestión de materiales hasta la
+        automatización y la inteligencia artificial.
+    </p>
+
+    <div class="badge">
+        Ciclo de Carrocería · FP Grado Medio
+    </div>
+</section>
+
+<main>
+
+<div class="intro">
+    <h2>🎯 Nuestra misión</h2>
+
+    <p>
+        Imagina que heredas un taller tradicional de chapa y pintura.
+        A lo largo de las diferentes unidades deberás tomar decisiones para
+        convertirlo en un taller moderno, eficiente, sostenible y digitalizado.
+    </p>
+
+    <p>
+        Cada unidad te aportará nuevas herramientas para lograrlo.
+    </p>
+</div>
+
+<h2 style="margin-bottom:25px;color:#183153">
+📚 Unidades del módulo
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="icon">♻️</div>
+
+        <h3>Unidad 1</h3>
+
+        <p>
+            Materiales, residuos y sostenibilidad en la empresa.
+            Descubre la diferencia entre economía lineal y circular y comienza
+            a analizar los problemas de un taller tradicional.
+        </p>
+
+        <a class="btn" href="unidades/ud1.html">
+            Entrar en la unidad
+        </a>
+
+        <div class="estado">
+            ✅ Disponible
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏭</div>
+
+        <h3>Unidad 2</h3>
+
+        <p>
+            Transformación digital y nuevas formas de trabajar.
+        </p>
+
+        <span class="btn locked">
+            Próximamente
+        </span>
+    </div>
+
+    <div class="card">
+        <div class="icon">☁️</div>
+
+        <h3>Unidad 3</h3>
+
+        <p>
+            Sistemas basados en la nube.
+        </p>
+
+        <span class="btn locked">
+            Próximamente
+        </span>
+    </div>
+
+    <div class="card">
+        <div class="icon">🤖</div>
+
+        <h3>Unidad 4</h3>
+
+        <p>
+            Tecnologías habilitadoras del futuro.
+        </p>
+
+        <span class="btn locked">
+            Próximamente
+        </span>
+    </div>
+
+    <div class="card">
+        <div class="icon">📊</div>
+
+        <h3>Unidad 5</h3>
+
+        <p>
+            Procesos y sistemas digitalizados.
+        </p>
+
+        <span class="btn locked">
+            Próximamente
+        </span>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚀</div>
+
+        <h3>Unidad 6</h3>
+
+        <p>
+            Diseña tu propio plan de transformación digital.
+        </p>
+
+        <span class="btn locked">
+            Próximamente
+        </span>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+    Digitalización aplicada a los sectores productivos · Curso de Carrocería
+</footer>
+
+</body>
+</html>
