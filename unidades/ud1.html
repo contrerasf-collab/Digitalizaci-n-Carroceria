@@ -1,1 +1,227 @@
 
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unidad 1 · Cuaderno digital</title>
+<style>
+:root{--n:#0b1f3a;--g:#2b3340;--o:#ff7a1a;--b:#f4f6f9;--w:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:var(--b);color:var(--g);line-height:1.5}
+aside{position:fixed;inset:0 auto 0 0;width:250px;background:var(--n);color:#fff;padding:16px;overflow:auto;z-index:5;transition:.25s}
+aside h1{font-size:15px;margin:0 0 4px}aside small{color:#9fb0c8}
+aside a{display:block;padding:8px 10px;margin:3px 0;border-radius:8px;color:#cfd8e6;font-size:13px;cursor:pointer}
+aside a.on{background:var(--o);color:#fff}aside a.v:before{content:"✓ ";color:var(--o)}aside a.on:before{color:#fff}
+.bar{height:8px;background:#22395c;border-radius:9px;margin:10px 0 14px}.bar i{display:block;height:100%;width:0;background:var(--o);border-radius:9px;transition:.3s}
+main{margin-left:250px;padding:24px;max-width:960px}
+#menu{display:none;position:fixed;top:8px;right:8px;z-index:6;background:var(--o);color:#fff;border:0;border-radius:8px;padding:8px 12px;font-size:18px}
+section{display:none;background:var(--w);border-radius:16px;padding:26px;box-shadow:0 4px 18px #0b1f3a14;border-top:6px solid var(--o)}
+section.on{display:block;animation:f .3s}@keyframes f{from{opacity:0;transform:translateY(8px)}}
+.tag{color:var(--o);font-weight:700;font-size:12px;letter-spacing:.1em}
+h2{color:var(--n);margin:.2em 0 .6em;font-size:26px}h3{color:var(--n);margin:.3em 0}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.flow b{background:var(--n);color:#fff;padding:10px 14px;border-radius:10px;font-size:14px}.flow span{color:var(--o);font-weight:700}
+.flow.c b{background:var(--o)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.card{background:var(--b);border-left:5px solid var(--o);border-radius:10px;padding:12px}
+details{background:var(--b);border-radius:10px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:700;color:var(--n)}
+textarea,input[type=text]{width:100%;padding:10px;border:2px solid #d5dbe5;border-radius:10px;font:inherit;margin:4px 0 10px}
+textarea{min-height:80px;resize:vertical}textarea:focus{outline:0;border-color:var(--o)}
+label{font-weight:600;font-size:14px;color:var(--n)}
+.act{background:#fff6ee;border:2px dashed var(--o);border-radius:12px;padding:14px;margin:14px 0}
+.q button{display:block;width:100%;text-align:left;padding:10px;margin:5px 0;border:2px solid #d5dbe5;background:#fff;border-radius:10px;font:inherit;cursor:pointer}
+.q button:hover{border-color:var(--o)}.q .ok{background:#dff6e5;border-color:#2e9d54}.q .ko{background:#fde3e3;border-color:#d94a4a}
+.q p{font-weight:700;margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}th{background:var(--n);color:#fff;padding:10px}td{padding:10px;border-bottom:1px solid #e1e6ee}td:first-child{font-weight:700;color:var(--n)}
+.big{background:linear-gradient(135deg,var(--n),var(--g));color:#fff;border-radius:14px;padding:22px;font-size:18px;margin:16px 0}.big em{color:var(--o);font-style:normal;font-weight:700}
+.nav{display:flex;justify-content:space-between;margin-top:20px;gap:8px}
+.btn{background:var(--o);color:#fff;border:0;border-radius:10px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}.btn.s{background:var(--n)}.btn:disabled{opacity:.3}
+svg text{font:700 13px system-ui;fill:#fff}
+@media(max-width:800px){aside{transform:translateX(-100%)}aside.open{transform:none}main{margin:0;padding:52px 10px 20px}#menu{display:block}section{padding:18px}h2{font-size:22px}}
+.story{background:#eaf0f8;border-left:5px solid var(--n);border-radius:10px;padding:12px 14px;margin:12px 0;font-style:italic}
+.story b{color:var(--o);font-style:normal}.tl{border-left:4px solid var(--o);padding-left:12px;margin:14px 0}
+.tl details{background:#fff;border:2px solid #e1e6ee}.tl details[open]{border-color:var(--o)}
+.tl .dec{background:#fff6ee;border-radius:8px;padding:8px;margin-top:8px;font-size:14px}.tl textarea{min-height:60px}
+.hl{background:var(--n);color:#fff;border-radius:14px;padding:16px;margin:14px 0}.hl b{color:var(--o)}
+.fb{background:#fff6ee;border-left:4px solid var(--o);border-radius:8px;padding:8px 10px;margin-top:8px;font-size:14px}.hier div{color:#fff;padding:9px 14px;border-radius:8px;margin:5px 0;font-weight:700;font-size:14px}.hier span{font-weight:400}
+</style></head><body>
+<button id="menu" onclick="document.querySelector('aside').classList.toggle('open')">☰</button>
+<aside><h1>🔧 Unidad 1</h1><small>Digitalización aplicada · Carrocería</small>
+<div class="bar"><i id="pb"></i></div><div id="nv"></div>
+<p><button class="btn s" style="width:100%;font-size:13px" onclick="exp()">⬇ Exportar respuestas</button></p>
+<p><small id="pt"></small></p></aside>
+<main>
+
+<section data-t="Bienvenida"><div class="tag">UNIDAD 1</div><h2>Materiales, residuos y sostenibilidad en la empresa</h2>
+<p>Este es tu cuaderno de trabajo. Todo lo que escribas se guarda solo en este dispositivo.</p>
+<div class="grid"><div class="card"><b>🎯 Objetivos</b><br>Entender cómo decide una empresa qué hace con recursos, materiales y residuos.</div>
+<div class="card"><b>🚗 Tu taller</b><br>Todo se relaciona con carrocería, pintura y recambios.</div>
+<div class="card"><b>🚀 Al final</b><br>Descubrirás por qué necesitamos la tecnología.</div></div>
+<div class="act"><label>¿Qué ocurre con los materiales después de utilizarlos?</label><textarea data-k="p1" placeholder="Piensa en un paragolpes roto, un bote de pintura vacío…"></textarea></div></section>
+
+<section data-t="Las empresas consumen recursos"><div class="tag">PANTALLA 2</div><h2>Las empresas consumen recursos</h2>
+<div class="flow"><b>📦 Recursos</b><span>→</span><b>🏭 Producción</b><span>→</span><b>🛒 Consumo</b></div>
+<p>Toda empresa <b>necesita recursos</b> (materiales, energía, agua), los <b>transforma</b> en productos o servicios y estos se <b>consumen</b>. Un taller recibe recambios, pintura y energía, y entrega coches reparados.</p>
+<h3>1 · ¿Qué es un recurso?</h3>
+<div class="card">Todo lo que una empresa <b>necesita para funcionar</b>: materiales, energía, agua, herramientas, personas y tiempo.</div>
+<h3>2 · Recurso, producto o servicio</h3>
+<div class="grid"><div class="card"><b>📦 Recurso</b><br>Lo que entra: la pintura.</div><div class="card"><b>🚗 Producto</b><br>Lo que se entrega y se puede tocar: un coche pintado.</div><div class="card"><b>🔧 Servicio</b><br>Un trabajo realizado: reparar una aleta.</div></div>
+<h3>3 · Mismo esquema, tres empresas</h3>
+<table><tr><th></th><th>Panadería</th><th>Taller de carrocería</th><th>Fábrica de coches</th></tr><tr><td>Recursos</td><td>Harina, agua, horno</td><td>Chapa, pintura, recambios</td><td>Acero, plástico, energía</td></tr><tr><td>Entrega</td><td>Producto: pan</td><td>Servicio: reparación</td><td>Producto: vehículo</td></tr><tr><td>Residuo</td><td>Restos, envases</td><td>Lijados, disolventes, piezas</td><td>Recortes, embalajes</td></tr></table>
+<h3>4 · ¿Qué recursos consume un taller?</h3>
+<div class="grid"><div class="card">🎨 <b>Pintura</b></div><div class="card">⚡ <b>Energía</b></div><div class="card">🚗 <b>Recambios</b></div><div class="card">💧 <b>Agua</b></div><div class="card">🛠 <b>Herramientas</b></div><div class="card">⏱ <b>Tiempo de trabajo</b></div></div>
+<div class="act"><label>Nombra 3 recursos que gasta un taller en un día normal.</label><textarea data-k="p2"></textarea>
+<label>¿Qué recurso sería más problemático si se agotara durante una semana? ¿Por qué?</label><textarea data-k="p2b"></textarea>
+<label>¿Cuál de esos recursos se podría aprovechar mejor sin perder calidad?</label><textarea data-k="p2c"></textarea></div></section>
+
+<section data-t="La economía lineal"><div class="tag">PANTALLA 3</div><h2>La economía lineal</h2>
+<div class="flow"><b>⛏ Extraer</b><span>→</span><b>🔩 Fabricar</b><span>→</span><b>🚗 Utilizar</b><span>→</span><b>🗑 Desechar</b></div>
+<p>Se usa una vez y se tira. Ejemplos: un guardabarros dañado que va al contenedor, un trapo de taller, una lata de spray vacía.</p>
+<h3>¿Por qué dominó durante décadas?</h3>
+<div class="grid"><div class="card">✅ <b>Simple</b><br>Se fabrica, se vende y se olvida.</div><div class="card">✅ <b>Barato</b><br>Materias primas y energía costaban poco.</div><div class="card">✅ <b>Abundante</b><br>Parecía que los recursos no se acabarían.</div></div>
+<div class="story"><b>Idea clave:</b> funcionaba porque nadie contaba lo que costaba tirar.</div>
+<h3>Tres casos rápidos</h3>
+<details><summary>🚗 Un paragolpes roto</summary>Se retira, se tira y se monta uno nuevo aunque la rotura fuera pequeña.</details>
+<details><summary>📱 Un teléfono móvil</summary>Se cambia cada pocos años; cuesta más reparar que comprar uno nuevo.</details>
+<details><summary>🧴 Una botella de plástico</summary>Se usa minutos y se desecha.</details>
+<div class="q act" data-id="l1" data-a="2" data-e="La botella se usa una vez y se desecha: no se repara ni se alarga su vida. El paragolpes y el móvil sí pueden repararse o reutilizarse."><p>¿Cuál de los tres sigue más claramente el modelo lineal?</p><button>Paragolpes roto</button><button>Teléfono móvil</button><button>Botella de plástico</button></div>
+<div class="q act" data-a="2"><p>Un taller cambia un faro con un pequeño soporte roto y tira el faro entero. ¿Qué modelo sigue?</p>
+<button>Circular</button><button>Ninguno</button><button>Lineal</button></div>
+<div class="act"><label>¿Qué crees que cambió para que este modelo empezara a fallar?</label><textarea data-k="p3"></textarea></div></section>
+
+<section data-t="Problemas de la lineal"><div class="tag">PANTALLA 4</div><h2>Problemas de la economía lineal</h2>
+<p>Cada problema tiene una causa y una consecuencia. Abre cada tarjeta:</p>
+<div class="grid"><div class="card">🗑 <b>Residuos</b><br>Montañas de material que no se aprovecha.</div><div class="card">🏭 <b>Contaminación</b><br>Aire, agua y suelo dañados.</div><div class="card">⛏ <b>Agotamiento</b><br>Las materias primas no son infinitas.</div><div class="card">⚡ <b>Energía</b><br>Fabricar de cero gasta mucha energía.</div></div>
+<details><summary>⛏ Agotamiento → piezas más caras</summary><b>Ejemplo:</b> metales y plásticos suben de precio al escasear, y el recambio nuevo se encarece.</details>
+<details><summary>🗑 Residuos → coste de gestión</summary><b>Ejemplo:</b> cada paragolpes tirado supone retirada y coste al taller, además del material perdido.</details>
+<details><summary>🏭 Contaminación → riesgo y sanciones</summary><b>Ejemplo:</b> un disolvente mal gestionado contamina el suelo y puede acarrear multas.</details>
+<details><summary>⚡ Energía → factura elevada</summary><b>Ejemplo:</b> fabricar una pieza nueva gasta mucha más energía que repararla.</details>
+<div class="q act" data-a="1"><p>Clasifica: "Cada vez cuesta más conseguir el material para fabricar piezas".</p><button>Contaminación</button><button>Agotamiento de recursos</button><button>Consumo energético</button></div>
+<div class="q act" data-a="0"><p>Clasifica: "Los disolventes usados acaban vertidos sin control".</p><button>Contaminación</button><button>Agotamiento de recursos</button><button>Residuos vacíos</button></div>
+<div class="act"><label>¿Por qué crees que este modelo empezó a cuestionarse?</label><textarea data-k="p4"></textarea></div></section>
+
+<section data-t="La economía circular"><div class="tag">PANTALLA 5</div><h2>La economía circular</h2>
+<div class="story"><b>Ojo:</b> la economía circular NO consiste solo en reciclar. Reciclar es la última opción, no la primera.</div>
+<svg viewBox="0 0 320 220" style="max-width:380px;display:block;margin:auto"><circle cx="160" cy="110" r="70" fill="none" stroke="#ff7a1a" stroke-width="6" stroke-dasharray="10 8"/>
+<g><rect x="105" y="5" width="110" height="34" rx="17" fill="#0b1f3a"/><text x="160" y="27" text-anchor="middle">REDUCIR</text>
+<rect x="215" y="93" width="100" height="34" rx="17" fill="#2b3340"/><text x="265" y="115" text-anchor="middle">REUTILIZAR</text>
+<rect x="105" y="181" width="110" height="34" rx="17" fill="#0b1f3a"/><text x="160" y="203" text-anchor="middle">REPARAR</text>
+<rect x="5" y="93" width="100" height="34" rx="17" fill="#2b3340"/><text x="55" y="115" text-anchor="middle">RECICLAR</text></g></svg>
+<h3>Jerarquía: de mejor a peor opción</h3>
+<div class="hier"><div style="background:#ff7a1a">1 · REDUCIR <span>→ Mejor opción</span></div><div style="background:#0b1f3a">2 · REUTILIZAR <span>→ Después</span></div><div style="background:#2b3340">3 · REPARAR <span>→ Después</span></div><div style="background:#5a6473">4 · RECICLAR <span>→ Finalmente</span></div></div>
+<details><summary>Reducir</summary>Usar menos material y generar menos residuo. <b>Taller:</b> ajustar la cantidad de pintura al trabajo.</details>
+<details><summary>Reutilizar</summary>Dar otro uso a lo que aún sirve. <b>Taller:</b> una pieza en buen estado de un coche siniestrado.</details>
+<details><summary>Reparar</summary>Arreglar en lugar de sustituir. <b>Taller:</b> un paragolpes con un desperfecto.</details>
+<details><summary>Reciclar</summary>Convertir el residuo en material nuevo. <b>Taller:</b> metales y plásticos de piezas ya inservibles.</details>
+<h3>En automoción</h3>
+<div class="grid"><div class="card">🧩 <b>Paragolpes</b><br>Reparar antes que sustituir; si no, reciclar el plástico.</div><div class="card">🔋 <b>Baterías</b><br>Segunda vida y reciclaje de sus metales.</div><div class="card">⚙️ <b>Componentes</b><br>Piezas remanufacturadas o de desguace homologado.</div></div>
+<div class="q act" data-id="c1" data-a="1" data-e="Reparar mantiene la pieza, su material y la energía con que se fabricó. Reciclar obliga a destruirla y volver a fabricar. Por eso reparar está más arriba en la jerarquía."><p>¿Qué es mejor?</p><button>A) Reciclar un paragolpes</button><button>B) Reparar un paragolpes</button></div></section>
+
+<section data-t="Lineal vs circular"><div class="tag">PANTALLA 6</div><h2>Lineal vs circular</h2>
+<div class="grid"><div class="card"><b>➡️ Lineal</b><br>Recurso → producto → residuo. Una vez y se acaba.</div><div class="card" style="border-color:var(--n)"><b>🔄 Circular</b><br>Recurso → producto → reparar/reutilizar/reciclar → recurso.</div></div>
+<table><tr><th></th><th>Lineal</th><th>Circular</th></tr>
+<tr><td>Esquema</td><td>Extraer-fabricar-usar-tirar</td><td>Reducir-reutilizar-reparar-reciclar</td></tr>
+<tr><td>Residuos</td><td>Muchos</td><td>Los mínimos</td></tr>
+<tr><td>Recursos</td><td>Se agotan</td><td>Se aprovechan más</td></tr>
+<tr><td>Producto</td><td>Vida corta</td><td>Vida larga</td></tr>
+<tr><td>Coste a largo plazo</td><td>Alto</td><td>Menor</td></tr></table>
+<h3>Dos talleres, un mismo trabajo</h3>
+<p>Ambos reparan 20 coches al mes con paragolpes dañados.</p>
+<table><tr><th></th><th>Taller A (lineal)</th><th>Taller B (circular)</th></tr>
+<tr><td>Piezas</td><td>Sustituye todas</td><td>Repara la mitad si es viable</td></tr>
+<tr><td>Costes</td><td>Altos en piezas nuevas</td><td>Menos piezas, algo más de mano de obra</td></tr>
+<tr><td>Residuos</td><td>20 paragolpes al contenedor</td><td>Unos 10 y bien separados</td></tr>
+<tr><td>Materiales</td><td>Todo mezclado</td><td>Plástico y metal separados</td></tr></table>
+<div class="act"><label>Con tus palabras: ¿cuál es la diferencia clave?</label><textarea data-k="p6"></textarea>
+<label>¿Qué inconvenientes puede tener el Taller B al empezar?</label><textarea data-k="p6b"></textarea></div></section>
+
+<section data-t="¿Por qué cambian?"><div class="tag">PANTALLA 7</div><h2>¿Por qué las empresas están cambiando?</h2>
+<p>Pulsa en cada tarjeta:</p>
+<details open><summary>🌍 Ambientales</summary>Menos residuos, menos contaminación, menos materias primas.<br><b>Taller:</b> menos disolvente vertido y menos piezas al contenedor.<br><b>Automoción:</b> las baterías usadas se reciclan y recuperan metales.</details>
+<details open><summary>👥 Sociales</summary>Nuevos empleos (reparación, reciclaje) y mejor imagen ante los clientes.<br><b>Taller:</b> el cliente confía más en quien repara bien y gestiona sus residuos.<br><b>Empleo:</b> técnicos en reparación de plásticos y remanufactura.</details>
+<details open><summary>💶 Económicas</summary>Ahorro en materiales y residuos, y nuevas vías de negocio.<br><b>Taller:</b> reparar un paragolpes puede costar menos que sustituirlo; vender chatarra separada da ingresos.<br><b>Negocio:</b> ofrecer reparación económica a clientes con presupuesto ajustado.</details>
+<div class="q act" data-id="s1" data-a="0" data-e="Reparar en vez de sustituir baja el coste de la pieza y reduce residuo: ahorra dinero y ayuda al medio ambiente a la vez."><p>Un taller repara paragolpes en vez de sustituirlos. ¿Qué ventajas obtiene?</p><button>Económica y ambiental</button><button>Solo social</button><button>Ninguna</button></div>
+<div class="act"><label>¿Qué beneficio crees que valoraría más el propietario de un taller? Justifica tu respuesta.</label><textarea data-k="p7"></textarea>
+<label>¿Y qué valoraría más el cliente? ¿Coincide?</label><textarea data-k="p7b"></textarea></div></section>
+
+<section data-t="Casos reales"><div class="tag">PANTALLA 8</div><h2>Casos reales</h2>
+<div class="story"><b>Taller Mediterráneo · lunes, 8:00.</b> Marta, la gerente, recibe la factura de gestión de residuos del mes: ha subido otra vez. "¿Los demás talleres tiran tanto como nosotros?", pregunta a Álex, el jefe de carrocería. Deciden investigar qué hace la competencia.</div>
+<p>Esto ya existe. Ejemplos habituales:</p>
+<div class="grid"><div class="card"><b>🚘 Fabricantes de coches</b><br>Recambios remanufacturados y reciclaje de baterías.</div><div class="card"><b>🛞 Neumáticos</b><br>Recauchutado y reciclaje de goma.</div><div class="card"><b>🔧 Desguaces</b><br>Recambios de segunda mano homologados.</div></div>
+<details><summary>🎨 Pintura: sistemas de recuperación de disolventes</summary>Algunos talleres limpian las pistolas en circuito cerrado y reutilizan el disolvente varias veces, en vez de gastar litros nuevos.</details>
+<details><summary>🧩 Plásticos: reparación de paragolpes</summary>Soldadura de plásticos y kits de reparación para parachoques con roturas o fijaciones dañadas, en lugar de sustituir la pieza entera.</details>
+<details><summary>🔋 Baterías: segunda vida</summary>Las baterías de vehículos eléctricos retiradas pueden usarse como almacenamiento de energía antes de reciclarse.</details>
+<div class="q act" data-a="1"><p>Un taller repara un paragolpes con soldadura de plástico en vez de cambiarlo. ¿Qué "R" aplica?</p><button>Reciclar</button><button>Reparar</button><button>Reducir</button></div>
+<div class="act"><label>¿Conoces algún caso cerca de ti?</label><textarea data-k="p8"></textarea>
+<label>Si Marta copiara UNA práctica de estos casos, ¿cuál elegirías y por qué?</label><textarea data-k="p8b"></textarea></div></section>
+
+<section data-t="Y en un taller…"><div class="tag">PANTALLA 9</div><h2>¿Y esto qué tiene que ver con un taller?</h2>
+<div class="story"><b>Martes.</b> Marta y Álex recorren el taller con una libreta. Objetivo: <b>ver qué se compra, qué se gasta y qué acaba en el contenedor</b>.</div>
+<div class="grid"><div class="card">🎨 <b>Pintura y disolventes</b><br>Restos de pintura, botes vacíos, disolvente de limpieza.</div><div class="card">📦 <b>Cartón y embalajes</b><br>Cajas de recambios, plásticos de protección.</div><div class="card">🔋 <b>Baterías</b><br>Extraídas en accidentes o sustituciones.</div><div class="card">🧩 <b>Plásticos</b><br>Paragolpes, molduras, faros rotos.</div><div class="card">🔩 <b>Metales</b><br>Chapas, aletas, puertas sustituidas.</div><div class="card">🚗 <b>Recambios</b><br>Piezas nuevas, usadas o remanufacturadas.</div></div>
+<details><summary>⚠️ ¿Qué residuos son peligrosos?</summary>Disolventes, pinturas, baterías, aceites y trapos impregnados requieren gestor autorizado y no pueden ir al contenedor normal.</details>
+<div class="q act" data-a="0"><p>Álex encuentra un trapo empapado de disolvente. ¿Dónde va?</p><button>Contenedor de residuo peligroso</button><button>Basura normal</button><button>Se lava y se reutiliza siempre</button></div>
+<div class="act"><b>🔎 Diagnóstico del taller.</b> Rellena tu inventario de un taller tipo:
+<label>Material 1 y qué pasa con él ahora</label><textarea data-k="p9"></textarea>
+<label>Material 2 y qué pasa con él ahora</label><textarea data-k="p9b"></textarea>
+<label>¿Cuál genera más coste? ¿Cómo lo sabrías con seguridad?</label><textarea data-k="p9c"></textarea></div></section>
+
+<section data-t="Viaje de un paragolpes"><div class="tag">PANTALLA 10 · EL CORAZÓN DE LA UNIDAD</div><h2>El viaje de un paragolpes</h2>
+<div class="story"><b>Miércoles.</b> Entra un coche con el paragolpes delantero roto. Marta se detiene: "Este mismo paragolpes ha hecho un viaje larguísimo antes de llegar a nuestro taller… y después irá al contenedor". Siguen su recorrido.</div>
+<div class="flow"><b>Materia prima</b><span>→</span><b>Fabricación</b><span>→</span><b>Vehículo</b><span>→</span><b>Uso</b><span>→</span><b>Accidente</b><span>→</span><b>Sustitución</b><span>→</span><b>Residuo</b></div>
+<p>Abre cada etapa y responde: <b>¿qué decisión se toma y quién la toma?</b></p>
+<div class="tl">
+<details><summary>1 · Materia prima</summary>Petróleo y aditivos para fabricar el plástico (polipropileno).<div class="dec">💭 ¿Podría usarse plástico reciclado?<textarea data-k="v1"></textarea></div></details>
+<details><summary>2 · Fabricación</summary>Moldeo por inyección, imprimación y a veces pintado. Consume energía y genera recortes.<div class="dec">💭 ¿Qué se hace con los recortes y defectos?<textarea data-k="v2"></textarea></div></details>
+<details><summary>3 · Vehículo y 4 · Uso</summary>Se monta en el coche y vive años expuesto a golpes, sol y pequeños roces.<div class="dec">💭 ¿Se podría diseñar para reparar fácilmente?<textarea data-k="v3"></textarea></div></details>
+<details><summary>5 · Accidente</summary>Un golpe a baja velocidad rompe el paragolpes. Llega al Taller Mediterráneo.<div class="dec">💭 Aquí decide el taller. ¿Reparar o sustituir? ¿Qué datos necesitas para decidir?<textarea data-k="v4"></textarea></div></details>
+<details><summary>6 · Sustitución</summary>Se pide uno nuevo, llega en caja con embalajes. Se pinta con capa base y barniz.<div class="dec">💭 ¿Qué materiales adicionales se consumen (pintura, cartón, disolventes)?<textarea data-k="v5"></textarea></div></details>
+<details><summary>7 · Residuo</summary>El paragolpes viejo termina en un contenedor, junto con lijados y restos de pintura.<div class="dec">💭 ¿A dónde debería ir? ¿Quién lo controla?<textarea data-k="v6"></textarea></div></details></div>
+<div class="q act" data-a="2"><p>En la etapa "Accidente", ¿qué decisión es más circular?</p><button>Sustituir siempre por seguridad</button><button>Tirar todo junto y ahorrar tiempo</button><button>Valorar la reparación si el daño lo permite y separar bien el residuo</button></div>
+<div class="hl"><b>Ahora, ¿podría hacerse de otra forma?</b> Vuelve a dibujar el viaje en circular:</div>
+<div class="flow c"><b>Fabricar con reciclado</b><span>→</span><b>Reparar</b><span>→</span><b>Reutilizar pieza</b><span>→</span><b>Reciclar el residuo</b></div>
+<div class="act"><label>¿Podría hacerse de otra forma? ¿En qué punto del viaje intervendrías?</label><textarea data-k="p10"></textarea>
+<label>Ese cambio, ¿cuánto crees que ahorraría al taller y al cliente? ¿Y si Marta no conoce las cifras?</label><textarea data-k="p10b"></textarea></div></section>
+
+<section data-t="Caso: Taller Mediterráneo"><div class="tag">PANTALLA 11</div><h2>Caso práctico: Taller Mediterráneo</h2>
+<div class="story"><b>Viernes, reunión de cierre.</b> Marta dice: "Necesito un plan para reducir costes y residuos, pero no sé por dónde empezar". Tú eres el asesor.</div>
+<p>El taller quiere <b>reducir costes y residuos</b>. Analízalo:</p>
+<p><small>Datos orientativos de un mes (ficticios):</small></p>
+<table><tr><th>Material</th><th>Cantidad</th><th>Coste</th></tr><tr><td>Paragolpes y plásticos sustituidos</td><td>35 uds</td><td>3.500 €</td></tr><tr><td>Disolventes y pintura</td><td>180 L</td><td>2.200 €</td></tr><tr><td>Cartón y embalaje</td><td>120 kg</td><td>—</td></tr><tr><td>Gestión de residuos peligrosos</td><td>—</td><td>650 €</td></tr></table>
+<h3>1 · Diagnóstico</h3>
+<label>Problemas que detectas</label><textarea data-k="c1"></textarea>
+<label>Materiales implicados</label><textarea data-k="c2"></textarea>
+<h3>2 · Propuesta</h3>
+<label>Mejoras posibles</label><textarea data-k="c3"></textarea>
+<label>Ordena tus 3 mejoras por prioridad y justifica tu criterio</label><textarea data-k="c4"></textarea>
+<h3>3 · Reflexión</h3>
+<label>¿Qué información te ha faltado para decidir con seguridad?</label><textarea data-k="c5"></textarea>
+<label>Cuando Marta ponga en marcha las mejoras, ¿cómo comprobará que funcionan?</label><textarea data-k="c6"></textarea></section>
+
+<section data-t="Reflexión y transición"><div class="tag">PANTALLA 12</div><h2>Reflexión final</h2>
+<label>¿Cómo sabría un taller cuántos residuos genera?</label><textarea data-k="r1"></textarea>
+<label>¿Cómo controlaría sus consumos?</label><textarea data-k="r2"></textarea>
+<label>¿Cómo registraría materiales reutilizados?</label><textarea data-k="r3"></textarea>
+<label>¿Cómo sabría si las mejoras funcionan?</label><textarea data-k="r4"></textarea>
+<div class="big">La economía circular nos muestra <em>qué</em> queremos conseguir.<br><br>Pero para conseguirlo debemos <em>recopilar información, analizar datos y controlar procesos</em>.<br><br>Ahí es donde entra la <em>digitalización</em>.</div>
+<div class="card" style="text-align:center"><div class="tag">🚀 PRÓXIMA MISIÓN</div><h3>¿Cómo puede ayudarnos la tecnología?</h3><small>Unidad 2</small></div></section>
+
+<div class="nav"><button class="btn s" id="pv">← Anterior</button><button class="btn" id="nx">Siguiente →</button></div>
+</main>
+<script>
+const S=[...document.querySelectorAll('section')],$=id=>document.getElementById(id);
+let st={};try{st=JSON.parse(localStorage.getItem('u1')||'{}')}catch(e){}
+st.n=st.n||{};st.q=st.q||{};st.v=st.v||[];st.c=st.c||0;
+const save=()=>{try{localStorage.setItem('u1',JSON.stringify(st))}catch(e){}};
+S.forEach((s,i)=>{const a=document.createElement('a');a.textContent=(i+1)+'. '+s.dataset.t;a.onclick=()=>go(i);$('nv').appendChild(a)});
+document.querySelectorAll('[data-k]').forEach(t=>{t.value=st.n[t.dataset.k]||'';t.oninput=()=>{st.n[t.dataset.k]=t.value;save()}});
+let qc=0;document.querySelectorAll('.q').forEach(q=>{const i=q.dataset.id||String(qc++);const bs=[...q.querySelectorAll('button')];
+const mark=c=>{bs.forEach((b,j)=>{b.disabled=true;if(j==q.dataset.a)b.classList.add('ok');else if(j==c)b.classList.add('ko')});if(q.dataset.e&&!q.querySelector('.fb')){const d=document.createElement('div');d.className='fb';d.textContent='💡 '+q.dataset.e;q.appendChild(d)}};
+if(st.q[i]!==undefined)mark(st.q[i]);
+bs.forEach((b,j)=>b.onclick=()=>{st.q[i]=j;save();mark(j)})});
+function go(i){i=Math.max(0,Math.min(S.length-1,i));st.c=i;if(!st.v.includes(i))st.v.push(i);save();
+S.forEach((s,k)=>s.classList.toggle('on',k==i));
+[...$('nv').children].forEach((a,k)=>{a.className=(k==i?'on ':'')+(st.v.includes(k)?'v':'')});
+const p=Math.round(st.v.length/S.length*100);$('pb').style.width=p+'%';$('pt').textContent='Progreso: '+p+'%';
+$('pv').disabled=i==0;$('nx').disabled=i==S.length-1;document.querySelector('aside').classList.remove('open');scrollTo(0,0)}
+$('pv').onclick=()=>go(st.c-1);$('nx').onclick=()=>go(st.c+1);
+function exp(){let t='UNIDAD 1 · RESPUESTAS\n\n';document.querySelectorAll('[data-k]').forEach(x=>{const l=x.previousElementSibling;t+=(l?l.textContent:x.dataset.k)+'\n'+(x.value||'(sin respuesta)')+'\n\n'});
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));a.download='respuestas_unidad1.txt';a.click()}
+go(st.c);
+</script></body></html>
