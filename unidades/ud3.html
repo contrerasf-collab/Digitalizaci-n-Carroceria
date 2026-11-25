@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UD3 · Sistemas basados en la nube</title>
+<style>
+:root{--n:#0b1f3a;--n2:#16345f;--o:#ff7a1a;--g:#eef1f6;--t:#1d2b3f;--ok:#1f9d55;--ko:#d64545}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:var(--g);color:var(--t);display:flex;min-height:100vh}
+nav{width:250px;background:var(--n);color:#fff;padding:16px;position:sticky;top:0;height:100vh;overflow:auto;flex-shrink:0}
+nav h1{font-size:15px;margin:0 0 4px}nav small{color:#9fb3d1}
+nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#cfdbef;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;margin:2px 0}
+nav button:hover{background:var(--n2)}nav button.on{background:var(--o);color:#fff;font-weight:700}nav button.v::after{content:" ✓";color:#7ee2a8}
+.pb{height:8px;background:#26426e;border-radius:6px;margin:12px 0}.pb i{display:block;height:100%;background:var(--o);border-radius:6px;transition:.3s}
+main{flex:1;padding:24px;max-width:920px;margin:auto;width:100%;min-width:0}
+header.h{background:linear-gradient(120deg,var(--n),var(--n2));color:#fff;border-radius:16px;padding:22px;border-bottom:5px solid var(--o)}
+header.h h2{margin:0 0 4px;font-size:26px}header.h p{margin:0;color:#c8d6ee}
+.card{background:#fff;border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 2px 8px #0b1f3a14}
+.ph{display:inline-block;background:var(--o);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+details{background:var(--g);border-radius:10px;padding:10px;border-left:4px solid var(--n2)}summary{cursor:pointer;font-weight:700}
+.bt{background:var(--o);color:#fff;border:0;padding:9px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+.bt.s{background:var(--n2)}.bt.s2{background:#fff;color:var(--n2);border:2px solid var(--n2);padding:7px 14px}.bt.s2:hover{background:var(--g)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.nb{margin-top:8px;text-align:center;background:var(--n2);color:#fff;border:1px solid #3a5a8c}
+.nl{margin-top:10px;text-align:center;font-size:12px;color:#9fb3d1;text-decoration:underline;background:none;border:0;cursor:pointer;width:100%}
+button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--o);outline-offset:2px;box-shadow:0 0 0 2px #fff}
+.rv{background:#fff4ea;border-left:4px solid var(--o);padding:10px 14px;border-radius:8px;margin-top:10px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px;border-radius:8px;margin:4px 0;background:var(--g)}
+.row span{flex:1;min-width:200px}
+.row.ok{background:#e3f6ea}.row.ko{background:#fde6e6}.row em{flex-basis:100%;font-size:13px}
+select,textarea{font:inherit;padding:7px;border:1px solid #b8c4d8;border-radius:8px;width:100%}
+select{width:auto;max-width:100%}textarea{min-height:70px}
+label{display:block;font-weight:700;margin:10px 0 4px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chips b{background:var(--n);color:#fff;padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600}
+.chips b.o{background:var(--o)}.ar{font-size:22px;color:var(--o);align-self:center;font-weight:700}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;text-align:center}
+.info div{background:var(--n);color:#fff;border-radius:12px;padding:12px 8px;border-top:4px solid var(--o);font-size:12px}
+.info div b{display:block;font-size:24px;margin-bottom:4px}
+.chk{display:block;padding:6px 0;font-weight:400}.chk input{margin-right:8px}
+.fig{margin:16px 0}.fig img{width:100%;border-radius:12px;display:block}.fig figcaption{font-size:13px;color:#5c6b80;margin-top:8px}
+.fig .wrap{position:relative}
+.mk{position:absolute;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#ff7a1ae0;border:3px solid #fff;color:#fff;font:800 16px system-ui;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #ff7a1a66,0 2px 8px #0006;cursor:pointer;transition:transform .18s,background .25s,box-shadow .25s}
+.mk:hover{transform:translate(-50%,-50%) scale(1.1)}
+.mk.on{background:var(--c,#1f9d55);box-shadow:0 0 0 4px #ffffffb3,0 2px 8px #0006}
+.mk.sel{transform:translate(-50%,-50%) scale(1.16);box-shadow:0 0 0 7px #ffffffd9,0 3px 12px #0008}
+.hint{font-size:13px;font-weight:600;color:#5c6b80;margin-bottom:8px}
+.mpanel{display:flex;gap:12px;align-items:center;background:#fff4ea;border-left:6px solid var(--o);border-radius:12px;padding:14px;margin-top:12px;min-height:80px;transition:.25s}
+.mapbody{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:840px){.mapbody{grid-template-columns:1fr 290px;align-items:start}.mapbody .mpanel{margin-top:0;position:sticky;top:12px}}
+.mpanel.on{background:#fff;box-shadow:0 4px 14px #0b1f3a22}
+.mpn{width:44px;height:44px;border-radius:50%;background:var(--o);color:#fff;font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.25s}
+.mpt b{display:block;color:var(--n);font-size:17px;margin-bottom:3px}
+.mpt span{font-size:14px;color:#3d4d63;line-height:1.45}
+.lvl{background:#f7f9fc;border-radius:12px;padding:12px;margin:14px 0}
+.lv{display:flex;align-items:center;gap:12px;background:#fff;border-left:6px solid var(--c);border-radius:10px;padding:11px 12px;margin:8px 0;box-shadow:0 1px 4px #0b1f3a0f}
+.ln{width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lv b{display:block;color:var(--n);font-size:15px;margin-bottom:2px}
+.lv em{font-style:normal;font-size:13px;color:#4a5a70;line-height:1.35}
+.lv .tag{flex-shrink:0;font-size:11px;font-weight:800;color:#fff;background:var(--c);padding:4px 8px;border-radius:20px;white-space:nowrap}
+.dg{width:100%;height:auto;display:block;background:#f7f9fc;border-radius:12px}
+.dg text{font-family:system-ui,Segoe UI,Arial,sans-serif}
+.dg .bl{font-size:13px;font-weight:800;fill:#fff;text-anchor:middle}
+.dg .smc{font-size:10px;fill:#0b1f3a;opacity:.65;text-anchor:middle}
+.dg .bk{font-size:12px;font-weight:800;fill:#0b1f3a}
+.dg .bs{font-size:10px;fill:#33455e}
+.tw{overflow:auto;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--n);color:#fff;padding:8px;text-align:left;font-weight:600}
+td{padding:8px;border-bottom:1px solid #d5dce8;vertical-align:top}
+.ctl{display:flex;justify-content:space-between;gap:8px;margin:20px 0;flex-wrap:wrap}
+@media(max-width:760px){body{flex-direction:column}nav{width:100%;height:auto;position:static}main{padding:12px}}
+</style></head><body>
+<nav>
+  <h1>UD3 · La nube</h1><small>Taller Mediterráneo</small>
+  <div class="pb"><i id="pg"></i></div><small id="pt"></small><div id="mn"></div>
+  <button class="bt" style="margin-top:12px;width:100%" onclick="ex()">⬇ Exportar respuestas</button>
+  <button class="nb" onclick="exj()">⬇ Exportar JSON</button>
+  <button class="nb" onclick="document.getElementById('imp').click()">⬆ Importar JSON</button>
+  <input type="file" id="imp" accept=".json,application/json" hidden onchange="imj(this)">
+  <button class="nb" onclick="rst()">↻ Reiniciar actividades</button>
+  <button class="nl" onclick="wipe()">Borrar toda la unidad</button>
+</nav>
+<main id="m"></main>
+<script>
+let S={};try{S=JSON.parse(localStorage.getItem('ud3')||'{}')}catch(e){}
+S.v=S.v||[];const B={};let cur=S.cur||0;
+const sv0=()=>{try{localStorage.setItem('ud3',JSON.stringify(S))}catch(e){}};
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const P=x=>({k:'p',x}),PH=x=>({k:'ph',x}),C=c=>({k:'cards',c}),RV=(b,x)=>({k:'rev',b,x});
+const SEL=(o,i)=>({k:'sel',o,i}),TA=f=>({k:'ta',f}),PIC=(s,a,c)=>({k:'pic',src:s,alt:a,cap:c});
+const MAP=(s,a,z,c)=>({k:'map',src:s,alt:a,z,c}),DIA=(svg,c)=>({k:'dia',svg,c});
+const LVL=c=>({k:'lvl',c});
+const TBL=(h,r)=>({k:'tbl',h,r});
+
+const D=[
+
+/* 1 */
+{t:'La nube del taller',s:'Dónde vive todo lo que genera el taller',b:[
+PH('UNIDAD 3 · DE QUÉ VAMOS A HABLAR'),
+P('En la Unidad 2 vimos que el taller necesita <b>datos</b>: tiempos, averías, fotos, presupuestos. Aquí vamos a ver <b>dónde se guardan</b>, <b>quién los procesa</b> y <b>cuánto tarda</b> en contestar.'),
+PIC('img/ud3/ud3_p1_portada.webp','Taller de carrocería al atardecer con una nube de datos sobre el edificio','El taller ya genera datos. La pregunta es dónde viven.'),
+{k:'chips',c:['📷 Fotos del golpe','📄 Partes','🚗 Historial','💰 Presupuestos','→','☁ ¿Dónde?']},
+P('<b>Marta:</b> «Ya tenemos la recepción digitalizada. Pero si mañana se rompe un móvil, perdemos las fotos de tres coches.»'),
+TA(['¿Dónde crees que debería estar toda la información del taller? ¿En el taller o fuera? Tu primera opinión:'])]},
+
+/* 2 */
+{t:'Los datos están en cinco sitios',s:'El problema, tal como está hoy',b:[
+PH('PROBLEMA'),
+P('Álex hace la cuenta: las fotos están en tres móviles, los partes en papel, el historial en un pen drive, los presupuestos en el correo y las citas en el cuaderno.'),
+C([['📱 Tres móviles','Fotos del golpe hechas por cada técnico, sin nombre ni matrícula.'],['📄 Partes en papel','Se mojan, se pierden y nadie sabe si están cobrados.'],['💾 Un pen drive','El historial de cinco años en el bolsillo de un pantalón.'],['📧 Correo y mensajes','Presupuestos aprobados por WhatsApp, sin rastro.']]),
+PIC('img/ud3/ud3_p2_caos.webp','Mostrador de taller con papeles, archivador, móviles y fotos de coches','Lo que hay hoy encima del mostrador.'),
+PH('EXPERIMENTO · ¿DÓNDE ESTÁ CADA COSA?'),
+P('Marca dónde vive hoy cada información. No es una opinión: es lo que hay.'),
+SEL(['Solo en el taller','En la nube'],[
+['Las fotos del móvil de Marta',0,'No han salido del teléfono: si se rompe, se pierden.'],
+['Los partes de trabajo en papel',0,'Están en el mostrador. Una ventana abierta y adiós.'],
+['Los presupuestos enviados por correo',1,'El correo sí está en la nube: se puede recuperar desde cualquier sitio.'],
+['El historial del pen drive',0,'Un solo sitio, sin copia, y en un objeto que se pierde.'],
+['El grupo de mensajes del taller',1,'Los mensajes viven en servidores del proveedor.'],
+['La facturación del ordenador del despacho',0,'Si falla el disco, no hay facturas.']]),
+RV('Lo que está pasando','La información no está mal guardada: está <b>repartida</b>. Y lo que está en un solo sitio, se pierde con ese sitio.'),
+TA(['¿Qué problemas concretos puede causar tener la información así repartida?'])]},
+
+/* 3 */
+{t:'La nube no está en el aire',s:'Qué es realmente el cloud',b:[
+PH('EXPERIMENTO MENTAL'),
+P('«Lo tengo en la nube». Vale. ¿Dónde está exactamente?'),
+C([['📍 No está en tu móvil','Si lo ves desde otro teléfono, no puede estar solo en el tuyo.'],['🏢 Son ordenadores de otros','Máquinas guardadas en naves enormes: los centros de datos.'],['💡 Naves que no duermen','Luz, aire acondicionado, baterías y vigilancia las 24 horas.'],['🌍 Puede estar en otro país','Por eso importa saber dónde se guardan los datos de tus clientes.']]),
+P('La nube no es magia: es <b>alquilar ordenadores</b> que están en otro sitio y llegar a ellos por internet.'),
+PIC('img/ud3/ud3_p3_datacenter.webp','Pasillo de un centro de datos con hileras de servidores','Al final del pasillo no hay nube: hay servidores.'),
+PH('EXPERIMENTO · EL TALLER SIN INTERNET'),
+P('Son las 9:00 de un martes. El router del taller se ha caído y no hay cobertura. ¿Qué puedes seguir haciendo?'),
+SEL(['Sigue funcionando','Se para'],[
+['Diagnosticar un coche con el equipo conectado por cable',0,'El equipo y el coche están ahí: no necesita internet.'],
+['Consultar el historial de un vehículo en la nube',1,'Está en servidores remotos: sin red, no hay historial.'],
+['Cobrar con el datáfono',1,'Necesita la autorización del banco.'],
+['Lijar, masillar y pintar',0,'Es trabajo de taller, no de red.'],
+['Enviar el presupuesto al seguro',1,'Sale por internet.'],
+['Abrir la puerta del taller con la llave',0,'Sigue siendo una llave.']]),
+RV('Lo que acabas de descubrir','Todo lo que depende de internet se para cuando se cae internet. De esa debilidad nacen <b>edge</b> y <b>fog computing</b>: procesar cerca para no depender tanto. Lo verás en la pantalla 11.'),
+TA(['¿Qué harías para que un corte de internet no parase el taller?'])]},
+
+/* 4 */
+{t:'Seis características',s:'Por qué la nube se impuso',b:[
+PH('CONCEPTO'),
+{k:'info',c:[['🔁','Bajo demanda'],['🌍','Universal'],['🧩','Pooling'],['📈','Elasticidad'],['💳','Medido'],['🔄','Actualizado']]},
+C([['🔁 Acceso bajo demanda','Contratas y usas en el momento, sin comprar máquinas ni esperar instalaciones.'],['🌍 Acceso universal','Desde cualquier dispositivo con internet: el taller, casa o la grúa.'],['🧩 Pooling de recursos','Muchos clientes comparten los mismos servidores del proveedor, que reparte la carga.'],['📈 Escalabilidad y elasticidad','Sube y baja según la demanda, sin comprar hardware.'],['💳 Servicio medido','Se paga por lo que se usa. Si un mes hay poco trabajo, se paga menos.'],['🔄 Actualizaciones automáticas','El proveedor actualiza y mantiene: el taller no instala nada.']]),
+PH('ACTIVIDAD · RECONOCE LA CARACTERÍSTICA'),
+P('Cada frase describe una característica. Elige cuál.'),
+SEL(['Acceso bajo demanda','Acceso universal','Pooling de recursos','Escalabilidad y elasticidad','Servicio medido','Actualizaciones automáticas'],[
+['El taller paga cada mes solo por las cuentas que utiliza',4,'Pagar por lo que se usa es el servicio medido.'],
+['Marta abre el historial desde casa y Álex a la vez desde el taller',1,'El mismo servicio desde cualquier lugar: acceso universal.'],
+['Tras la granizada del verano pasan de 2 a 6 usuarios y luego vuelven a 2',3,'Sube y baja según la demanda: elasticidad.'],
+['El proveedor actualiza la aplicación sin que nadie instale nada',5,'Las actualizaciones corren de su cuenta.'],
+['Muchos talleres comparten los mismos servidores del proveedor',2,'Recursos compartidos: pooling.'],
+['El taller amplía el espacio de fotos en el momento, sin llamar a nadie',0,'Se sirve solo, cuando se pide.']]),
+TA(['¿Cuál de las seis te parece la más valiosa para un taller pequeño? ¿Por qué?'])]},
+
+/* 5 */
+{t:'Tres niveles: IaaS · PaaS · SaaS',s:'Quién gestiona qué',b:[
+PH('LOS TRES NIVELES'),
+P('Quien usa la nube no siempre gestiona lo mismo. Hay tres niveles y la diferencia es <b>cuánto pones tú</b>.'),
+LVL([
+['SaaS · software','Usas la aplicación y ya está: el proveedor pone el servidor, el mantenimiento y las actualizaciones.','#ff7a1a','📱','tú: nada'],
+['PaaS · plataforma','Tú escribes el código; el proveedor pone la plataforma para desarrollarlo y desplegarlo.','#2ea8ff','🧑‍💻','tú: el código'],
+['IaaS · infraestructura','Alquilas máquinas, red y almacenamiento y encima pones el sistema operativo y los programas.','#16345f','🖥','tú: sistema y apps']]),
+P('<small>De arriba abajo el taller gestiona más: en SaaS no montas nada; en IaaS lo montas casi todo.</small>'),
+C([['🧾 Ejemplos de IaaS','Amazon EC2 (máquinas virtuales), Google Cloud Storage, Oracle Cloud Database. <b>Salida profesional:</b> administrador de sistemas y redes.'],['🧾 Ejemplos de PaaS','Google App Engine, Heroku. <b>Salida profesional:</b> desarrollador de aplicaciones, ingeniero de DevOps.'],['🧾 Ejemplos de SaaS','Microsoft 365, Dropbox, Salesforce. <b>Salida profesional:</b> especialista en implantación de software y soporte.'],['🚗 ¿Y en tu taller?','Casi todo lo que usa un taller pequeño es <b>SaaS</b>: la app de citas, la de presupuestos, el correo. IaaS y PaaS son para quien desarrolla.']]),
+RV('El truco de la cocina','IaaS es alquilar la cocina vacía; PaaS, la cocina con fogones y menaje; SaaS, el plato ya servido.'),
+PH('ACTIVIDAD · CLASIFICA'),
+P('Coloca cada servicio en su nivel.'),
+SEL(['IaaS','PaaS','SaaS'],[
+['Amazon EC2 (máquinas virtuales)',0,'Alquilas la máquina y tú pones el sistema operativo: IaaS.'],
+['Google Cloud Storage',0,'Almacenamiento contratado como infraestructura: IaaS.'],
+['Oracle Cloud Database',0,'Infraestructura de base de datos gestionada: IaaS.'],
+['Google App Engine',1,'Plataforma para desplegar tu propio código: PaaS.'],
+['Heroku',1,'Plataforma de desarrollo y despliegue: PaaS.'],
+['Microsoft 365',2,'Usas la aplicación y ya está: SaaS.'],
+['Dropbox',2,'Guardas archivos y los usas desde la aplicación: SaaS.'],
+['Salesforce (CRM)',2,'Software de gestión listo para usar: SaaS.']]),
+TA(['El programa con el que se valoran los daños en tu taller, ¿de qué nivel sería? Justifícalo.'])]},
+
+/* 6 */
+{t:'Pública, privada o híbrida',s:'Dónde vive lo que contratas',b:[
+PH('LOS TRES MODELOS'),
+P('No todo puede ir al mismo sitio. El expediente del seguro y los datos del cliente no se tratan igual.'),
+C([['🌐 Nube pública','Los recursos son de un proveedor externo y se comparten entre clientes. <b>Ventajas:</b> económica, escala sola. <b>Ojo:</b> menos control.'],['🔒 Nube privada','La infraestructura es exclusiva de una organización. <b>Ventajas:</b> control y rendimiento. <b>Ojo:</b> más cara y más trabajo.'],['🔀 Nube híbrida','Combina las dos: lo delicado dentro y lo demás fuera. <b>Ventajas:</b> flexibilidad y resiliencia.']]),
+PH('ACTIVIDAD · ¿QUÉ MODELO ES?'),
+SEL(['Pública','Privada','Híbrida'],[
+['Una aplicación de citas que usan miles de talleres',0,'Recursos compartidos del proveedor: pública.'],
+['Los historiales de una mutua de accidentes',1,'Datos muy sensibles en infraestructura exclusiva: privada.'],
+['El taller guarda las fotos en la nube y la facturación en su servidor',2,'Mezcla recursos propios y ajenos: híbrida.'],
+['Un banco con los datos de sus clientes en su propio centro de datos',1,'Infraestructura exclusiva: privada.'],
+['Un taller que empieza: citas en la nube y vídeos del peritaje en su disco',2,'Combina las dos: híbrida.']]),
+RV('El caso del Taller Mediterráneo','Marta quiere <b>híbrida</b>: las fotos pesadas y el programa de facturación se quedan en el taller; las citas y los presupuestos van a la nube para verlos desde fuera.'),
+TA(['¿Qué datos del taller no subirías nunca a una nube pública? ¿Por qué?'])]},
+
+/* 7 */
+{t:'Cómo se organiza por dentro',s:'Una app no es un programa único',b:[
+PH('ARQUITECTURA'),
+P('La aplicación que gestiona un taller no es un bloque: son piezas pequeñas que se hablan entre ellas.'),
+{k:'chips',c:['📱 App','→','🔀 Malla','→','🧩 Citas','🧩 Presupuestos','🧩 Fotos','→','☁ Nube']},
+C([['🧩 Microservicios','La aplicación se divide en servicios independientes, cada uno con su función (citas, presupuestos, fotos) y se comunican por interfaces. Si uno falla, los demás siguen.'],['⚡ Serverless (sin servidor)','El código se ejecuta solo cuando ocurre algo: llega una foto, se genera el PDF. No hay servidor encendido esperando, y se paga por uso.'],['🔀 Malla de servicios','Una capa que gestiona la comunicación entre microservicios: reparte, vigila y corta si algo va mal.']]),
+P('<b>En el taller:</b> la app de recepción no sabe calcular un presupuesto. Solo se lo pide al servicio de presupuestos. Así puede cambiar el cálculo sin tocar la recepción.'),
+PH('ACTIVIDAD · ¿QUÉ ES CADA COSA?'),
+SEL(['Microservicios','Serverless','Malla de servicios'],[
+['La app se divide en piezas: citas, presupuestos y fotos',0,'Servicios independientes que se comunican: microservicios.'],
+['Una función se ejecuta solo cuando llega una foto nueva',1,'Se activa con el evento y desaparece: serverless.'],
+['Una capa gestiona cómo se hablan esas piezas',2,'Eso es exactamente la malla de servicios.']]),
+RV('¿Por qué se monta así?','Porque un taller no puede parar. Si se cae el servicio de fotos, la app sigue cobrando y citando.'),
+TA(['Pon un ejemplo del taller donde separar el sistema en piezas evite que todo se pare a la vez.'])]},
+
+/* 8 */
+{t:'Qué se contrata',s:'Los cuatro servicios de la nube',b:[
+PH('SERVICIOS EN LA NUBE'),
+C([['💾 Almacenamiento','Espacio para guardar: fotos, vídeos, PDF, expedientes. <b>En el taller:</b> las 400 fotos de cada reparación.'],['⚙ Cómputo y procesamiento','Máquinas virtuales, contenedores o funciones para ejecutar programas. <b>En el taller:</b> la app de presupuestos.'],['🌐 Redes y conectividad','Conectar sedes, dar acceso seguro y rápido. <b>En el taller:</b> que la gestoría entre sin abrir puertos.'],['🗄 Bases de datos','Guardar datos ordenados y consultarlos rápido. <b>En el taller:</b> el historial de reparaciones.']]),
+PH('ACTIVIDAD · ¿QUÉ SERVICIO NECESITA?'),
+SEL(['Almacenamiento','Cómputo y procesamiento','Redes y conectividad','Bases de datos'],[
+['Guardar 400 fotos por coche durante cinco años',0,'Es guardar archivos: almacenamiento.'],
+['Ejecutar la aplicación de presupuestos',1,'Hay que procesar: cómputo.'],
+['Conectar el taller con la gestoría sin abrir puertos',2,'Es comunicación segura entre sedes: redes.'],
+['Saber cuántas reparaciones de paragolpes se hicieron en 2025',3,'Consultar datos ordenados: base de datos.']]),
+P('<b>Ojo:</b> casi todo lo que usas mezcla los cuatro. Una foto se guarda (almacenamiento), viaja (redes), se registra en el expediente (base de datos) y se procesa para el presupuesto (cómputo).'),
+TA(['¿Cuál de los cuatro servicios crees que gasta más en un taller como el vuestro? ¿Por qué?'])]},
+
+/* 9 */
+{t:'Implantar sin sustos',s:'Antes de contratar, piensa',b:[
+PH('ANTES DE CONTRATAR'),
+P('Mudarse a la nube no es pulsar un botón. Hay que mirar dos cosas: <b>qué necesitas</b> y <b>con qué lo haces</b>.'),
+C([['🔍 Los procesos críticos','Qué tareas no pueden fallar: recepción, presupuestos, entrega del coche.'],['📦 Volumen y procesamiento','Cuántos datos generas y cuánta potencia necesitas para tratarlos.'],['📜 Seguridad y normativa','Qué datos son personales y qué exige la ley. Se trata en la pantalla 10.'],['🔌 Lo que ya tienes','La nube no sustituye el taller: tiene que hablar con lo que ya funciona.'],['🧑‍🔧 La gente','Si el equipo no lo entiende, no se usa. La formación no es un extra.']]),
+P('Y qué tecnologías hacen falta para que todo esto funcione:'),
+{k:'info',c:[['📊','Volumen'],['⚡','Velocidad'],['🎨','Variedad'],['✅','Veracidad'],['💡','Valor']]},
+P('Son las <b>cinco V del Big Data</b>: cuánto dato hay, a qué velocidad llega, de cuántas formas distintas, si es fiable y si sirve para decidir algo.'),
+PH('ACTIVIDAD · LAS CINCO V'),
+SEL(['Volumen','Velocidad','Variedad','Veracidad','Valor'],[
+['3.000 fotos por reparación acumuladas en un año',0,'Cantidad de datos: volumen.'],
+['El sensor envía cincuenta lecturas por segundo',1,'Llega muy rápido: velocidad.'],
+['Fotos, PDF del seguro, texto del parte y audio del cliente',2,'Formatos distintos: variedad.'],
+['Un parte con la matrícula mal escrita',3,'El dato no es fiable: veracidad.'],
+['Saber qué reparación deja más margen',4,'Sirve para decidir: valor.']]),
+TA(['¿Qué pasaría si el taller subiera a la nube datos sin ordenar y sin comprobar?'])]},
+
+/* 10 */
+{t:'Seguridad y disponibilidad',s:'Lo que puede salir mal',b:[
+PH('LO QUE PUEDE SALIR MAL'),
+P('El taller guarda nombres, teléfonos, matrículas y fotos de coches. Eso son <b>datos personales</b> y la ley obliga a protegerlos.'),
+C([['🔐 Ciberseguridad','Contraseñas fuertes, cifrado y vigilancia. Un taller con la puerta abierta también tiene la puerta digital.'],['📜 Cumplimiento normativo','RGPD y normativa española: quién puede ver qué y durante cuánto tiempo.'],['🛡 Resiliencia','Copias, réplicas y planes para volver a funcionar tras un fallo.'],['👤 Identidades y accesos','Cada persona, su usuario. Lo que no necesitas ver, no lo ves.'],['👁 Monitorización','Detectar algo raro a tiempo evita sustos mayores.'],['📋 Acuerdos de nivel de servicio','El contrato donde el proveedor promete disponibilidad y tiempos de respuesta.']]),
+PH('ACTIVIDAD · ¿PROTEGE O NO PROTEGE?'),
+SEL(['Protege los datos','No protege los datos'],[
+['Cada técnico con su usuario y su contraseña',0,'Cada acceso queda identificado: protege.'],
+['Una sola cuenta para todo el taller',1,'Nadie sabe quién hizo qué: no protege.'],
+['Copias de seguridad automáticas cada noche',0,'Si algo se pierde, se recupera: protege.'],
+['El pen drive con los historiales en el cajón',1,'Un solo sitio, sin copia: no protege.'],
+['Un contrato que fija qué pasa si el servicio se cae',0,'Es un SLA: protege al taller.'],
+['Guardar las fotos en el móvil personal del técnico',1,'Datos de clientes fuera de control: no protege.']]),
+RV('SLA en una frase','Es el contrato donde el proveedor se compromete a un nivel de servicio (disponibilidad, tiempo de respuesta) y asume consecuencias si no lo cumple.'),
+TA(['El taller guarda fotos de coches con la matrícula visible. ¿Son datos personales? Justifícalo.'])]},
+
+/* 11 */
+{t:'Edge: el airbag no espera',s:'Procesar donde nace el dato',b:[
+PH('PROBLEMA'),
+P('Un coche frena de golpe. El sistema tiene que decidir en <b>milisegundos</b> si salta el airbag. No hay tiempo para preguntar a la nube.'),
+{k:'chips',c:['📡 Sensor','→','🧠 Decisión en el coche','→','☁ Nube (registro)']},
+PIC('img/ud3/ud3_p4_edge_obd.webp','Manos con guantes conectando el equipo de diagnosis al puerto OBD de un coche','Aquí, en el coche, es donde se decide.'),
+PH('CONCEPTO'),
+P('<b>Edge computing</b> es procesar los datos <b>cerca de donde se generan</b>, en lugar de mandarlos todos a un centro de datos.'),
+C([['⏱ Menos latencia','La respuesta llega en milisegundos. Sin eso no hay airbag, ni frenada, ni ángulo muerto.'],['📶 Menos ancho de banda','No se manda todo: se manda lo importante.'],['🔒 Más privacidad','Lo delicado se queda cerca y no viaja.'],['🔋 Más eficiencia','Menos datos viajando es menos energía y menos coste.']]),
+PH('ACTIVIDAD · ¿EN EL COCHE O EN LA NUBE?'),
+P('Piensa en qué tiene que responder ya y qué puede esperar.'),
+SEL(['En el coche (edge)','En la nube'],[
+['Decidir si salta el airbag',0,'Milisegundos: tiene que decidirse en el coche.'],
+['Calcular el presupuesto de la reparación',1,'No hay prisa: se calcula en la nube.'],
+['Avisar de un peatón en el ángulo muerto',0,'La respuesta no puede esperar a la red.'],
+['Guardar el historial de reparaciones',1,'Se guarda para consultarlo cuando haga falta.'],
+['Corregir la trayectoria en una frenada',0,'Es una decisión física e inmediata.'],
+['Comparar el coste con el del mes pasado',1,'Es análisis, no reacción: nube.']]),
+TA(['¿Qué pasaría si el airbag dependiera de la cobertura del móvil?'])]},
+
+/* 12 */
+{t:'Fog y mist',s:'Dos escalones más cerca del dato',b:[
+PH('LAS DOS CAPAS QUE FALTAN'),
+P('Edge no está solo. Entre el sensor y la nube hay dos escalones intermedios.'),
+PIC('img/ud3/ud3_p5_fog_rack.webp','Armario de comunicaciones abierto en la pared de un taller, con switch, gateway y antena','Fog: el armario del taller. Aquí se filtra antes de subir.'),
+P('<b>Fog computing</b> extiende el edge una capa más allá del dispositivo, pero sin llegar a la nube. Es la <b>capa intermedia</b>: en un taller, el armario de comunicaciones o el pequeño servidor de la oficina.'),
+C([['📈 Escalabilidad y distribución','Reparte el trabajo entre varios nodos cercanos.'],['⚙ Más capacidad','Puede con tareas más complejas que un solo dispositivo.'],['🔗 Puente con la nube','Ordena y reduce lo que sube.'],['🧮 Optimiza el dato','Filtra y agrupa antes de enviarlo.']]),
+PIC('img/ud3/ud3_p6_sensor.webp','Sensor ultrasónico de aparcamiento en el paragolpes de un coche, con gotas de agua','Mist: el propio sensor. Aquí se decide sin consultar a nadie.'),
+P('<b>Mist computing</b> es el escalón más cercano: el procesamiento ocurre <b>en el propio dispositivo</b>. El sensor del paragolpes detecta y avisa; no pregunta.'),
+C([['🎯 Procesa en la fuente','Analiza y filtra en el mismo sitio donde nace el dato.'],['📉 Menos transmisiones','Solo sube lo que de verdad importa.'],['⚡ Latencia ultrabaja','La distancia al dato es casi cero.']]),
+PH('ACTIVIDAD · ¿EN QUÉ CAPA?'),
+SEL(['Edge','Fog','Mist','Nube'],[
+['El sensor del paragolpes pita sin consultar a nadie',2,'Procesa en el propio dispositivo: mist.'],
+['El armario del taller recoge las cámaras y filtra el vídeo',1,'Capa intermedia cerca de los datos: fog.'],
+['El equipo de diagnosis decide si hay un fallo en el coche',0,'Procesa junto al vehículo: edge.'],
+['Se guardan tres años de historiales para hacer estadísticas',3,'Almacenamiento y análisis central: nube.']]),
+RV('La regla de oro','Cuanto más urgente es la respuesta y más pequeño el dato, más cerca se procesa.'),
+TA(['¿Por qué no se sube todo directamente a la nube? Da al menos dos razones.'])]},
+
+/* 13 */
+{t:'Las tres capas, un solo dato',s:'Sigue el recorrido de un golpe',b:[
+PH('RECORRIDO'),
+P('Toca los cuatro números y sigue lo que le pasa a un dato: un golpe en la puerta.'),
+MAP('img/ud3/ud3_p7_capas.webp','Ilustración de las capas nube, fog, edge y mist aplicadas a un taller',[
+[52,16,'Nube','Se queda el historial, la estadística y lo que ve el seguro. Aquí llega en segundos, no en milisegundos.','#2ea8ff'],
+[44,43,'Fog','El armario del taller recibe los avisos de todos los coches, agrupa y decide qué merece la pena subir.','#1f9d55'],
+[50,75,'Edge','El coche y el equipo de diagnosis detectan el golpe y leen los códigos en el mismo box.','#ff7a1a'],
+[34,78,'Mist','El sensor del paragolpes detecta el impacto y avisa por su cuenta, sin esperar a nadie.','#7a5cff']],'Toca un número de la imagen.'),
+PH('LO QUE SE QUEDA Y LO QUE SUBE'),
+C([['⚡ En el acto','El sensor avisa. El equipo de diagnosis registra el código. Todo ocurre en el coche, en milisegundos.'],['🧮 En el taller','El armario reúne los avisos de todos los vehículos y filtra el ruido antes de enviar nada.'],['☁ En la nube','Se guarda el historial, se compara con casos parecidos y se genera el informe para el cliente y el seguro.'],['📱 En el bolsillo','El cliente abre el estado de su reparación desde el móvil, sin llamar por teléfono.']]),
+TA(['¿Qué datos de ese golpe se quedarían en el taller y cuáles subirías a la nube? Justifica cada uno.','¿Qué ganaría el cliente con este recorrido? ¿Y el taller?'])]},
+
+/* 14 */
+{t:'Ventajas y peajes',s:'Lo que se gana y lo que se paga',b:[
+PH('LAS DOS CARAS'),
+P('La nube no es gratis ni perfecta. Tiene ventajas claras y también facturas que no son dinero.'),
+TBL(['','Taller clásico','Taller en la nube'],[
+['Dónde están los datos','En el ordenador del despacho','En servidores del proveedor'],
+['Si se estropea el equipo','Se pierde todo lo que no esté copiado','Se entra desde otro equipo'],
+['Coste','Comprar el servidor y renovarlo','Pago mensual por uso'],
+['Acceso desde casa','Solo si hay algo montado','Desde cualquier sitio'],
+['Si se cae internet','Se sigue trabajando en local','Se para lo que dependa de la nube'],
+['Actualizaciones','Las hace el taller, o no se hacen','Automáticas']]),
+C([['✅ Lo que se gana','Coste por uso, escala cuando hace falta, copias y actualizaciones del proveedor, acceso desde cualquier lugar.'],['⚠️ Lo que se paga','Dependencia de internet, datos fuera de casa, obligaciones del RGPD, formación y el riesgo de quedarse atado a un proveedor.'],['🔒 Proveedor cautivo','Migrar de proveedor cuesta tiempo y dinero. Se evita con formatos estándar y copias propias.'],['💸 La factura que crece','Lo que empieza barato puede dispararse si guardas todo para siempre sin borrar nada.']]),
+RV('El peaje más caro en un taller','Quedarse sin internet un martes por la mañana con seis coches esperando presupuesto.'),
+TA(['Elige el peaje que más te preocupe y propón cómo reducirlo.'])]},
+
+/* 15 */
+{t:'Nube y sostenibilidad',s:'¿Digitalizar contamina más?',b:[
+PH('LA PREGUNTA INCÓMODA'),
+P('Los centros de datos gastan mucha electricidad y necesitan refrigeración. Pero también pueden ser <b>mucho más eficientes</b> que cien servidores pequeños repartidos por cien talleres.'),
+PIC('img/ud3/ud3_p8_sostenibilidad.webp','Centro de datos modular junto a una granja solar al atardecer','El reto: alimentar los datos sin quemar carbón.'),
+{k:'info',c:[['−84 %','emisiones al migrar'],['−65 %','energía'],['24/7','renovable en 2030'],['8/864','fallos en el mar']]},
+C([['☀️ Energía renovable','Los grandes proveedores compran o construyen renovables: AWS tiene plantas solares en Sevilla y Zaragoza, y Google quiere funcionar con energía limpia las 24 horas en 2030.'],['❄️ Refrigeración','Es el mayor gasto. Se enfría con aire frío, agua de mar o sumergiendo el centro de datos: en el proyecto Natick solo fallaron 8 de 864 servidores.'],['🗑 Lo que sí puedes hacer','No duplicar fotos, borrar lo que ya no sirve, apagar lo que no se usa y elegir proveedor con energía limpia.']]),
+P('Es la misma idea de la <b>Unidad 1</b>: reducir antes que reciclar, también con los datos. Un gigabyte que no guardas no gasta nada.'),
+TA(['¿Digitalizar el taller lo hace más o menos sostenible? Argumenta tu respuesta.'])]},
+
+/* 16 */
+{t:'Misión: la nube del taller',s:'Evidencia principal de la unidad',b:[
+PH('LA MISIÓN'),
+P('Marta y Álex te piden el diseño. No quieren teoría: quieren saber <b>dónde vive cada dato</b> y <b>por qué</b>.'),
+P('Estos son los seis datos que les quitan el sueño:'),
+TBL(['Dato','¿Dónde lo pondrías?','Por qué'],[
+['La presión de los neumáticos mientras el coche está en el box','',''],
+['El vídeo de cuatro horas de la cabina de pintura','',''],
+['El historial de reparaciones de los últimos cinco años','',''],
+['El aviso del sensor cuando el coche está en la calle','',''],
+['El presupuesto que tiene que aprobar el seguro','',''],
+['Las fotos del peritaje que se envían al seguro','','']]),
+P('<small>Copia la tabla en tu cuaderno o resuélvela en las respuestas de abajo.</small>'),
+PH('DECISIONES'),
+P('Marca los modelos que aparecerían en tu propuesta:'),
+{k:'chk',o:['IaaS','PaaS','SaaS']},
+P('¿Y cómo la montarías?'),
+{k:'chk',o:['Nube pública','Nube privada','Nube híbrida']},
+PH('TU PROPUESTA'),
+TA(['1. ¿Qué problema resuelve tu diseño?','2. ¿Qué se queda en el taller (edge o fog) y qué sube a la nube?','3. ¿Qué modelo de servicio y de despliegue eliges?','4. ¿Qué le dirías a Marta sobre el coste y la seguridad?']),
+RV('Antes de entregar','Comprueba que tu propuesta responde a las seis filas de la tabla y que justificas cada decisión con una razón, no con un «porque es mejor».'),
+PIC('img/ud3/ud3_p9_cierre.webp','Taller de carrocería de noche con la nube de datos encendida encima','El taller cierra. Los datos siguen trabajando.'),
+P('La nube ha resuelto el dónde y el quién. Pero todavía falta el <b>cómo se produce</b>: automatización, sensores y sistemas digitalizados.'),
+{k:'next'}]}
+
+];
+
+function R(b,id){B[id]=b;
+if(b.k=='p')return`<p>${b.x}</p>`;
+if(b.k=='ph')return`<div class="ph">${b.x}</div>`;
+if(b.k=='chips')return`<div class="chips">${b.c.map(c=>c=='→'?'<span class="ar">→</span>':`<b>${c}</b>`).join('')}</div>`;
+if(b.k=='info')return`<div class="info">${b.c.map(c=>`<div><b>${c[0]}</b>${c[1]}</div>`).join('')}</div>`;
+if(b.k=='cards')return`<div class="g">${b.c.map(c=>`<details><summary>${c[0]}</summary><p>${c[1]}</p></details>`).join('')}</div>`;
+if(b.k=='rev')return`<button class="bt s" id="b${id}" aria-expanded="false" aria-controls="r${id}" onclick="tr('${id}')">${b.b}</button><div class="rv" id="r${id}" hidden>${b.x}</div>`;
+if(b.k=='next')return`<div class="rv"><b>PRÓXIMA MISIÓN:</b> la Unidad 4, las tecnologías habilitadoras 🤖<br>Ya sabemos dónde viven los datos. Ahora toca ver qué los produce.</div>`;
+if(b.k=='pic')return`<figure class="fig"><img src="${b.src}" alt="${esc(b.alt)}" loading="lazy"><figcaption>${b.cap}</figcaption></figure>`;
+if(b.k=='dia')return`<figure class="fig">${b.svg}<figcaption>${b.c}</figcaption></figure>`;
+if(b.k=='tbl')return`<div class="tw"><table><tr>${b.h.map(h=>`<th>${h}</th>`).join('')}</tr>${b.r.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+if(b.k=='lvl')return`<div class="lvl">${b.c.map(x=>`<div class="lv" style="--c:${x[2]}"><span class="ln">${x[3]}</span><div style="flex:1;min-width:0"><b>${x[0]}</b><em>${x[1]}</em></div><span class="tag">${x[4]}</span></div>`).join('')}</div>`;
+if(b.k=='map'){const v=S['m'+id]||[];return`<figure class="fig" id="fg${id}"><div class="hint">👆 ${b.c}</div><div class="mapbody"><div class="wrap"><img src="${b.src}" alt="${esc(b.alt)}" loading="lazy">${b.z.map((z,n)=>`<button class="mk${v.includes(n)?' on':''}" style="left:${z[0]}%;top:${z[1]}%;--c:${z[4]||'#ff7a1a'}" onclick="mz('${id}',${n})" aria-label="${esc(z[2])}">${n+1}</button>`).join('')}</div><div class="mpanel" id="pnl${id}" aria-live="polite"><div class="mpn" id="pn${id}">?</div><div class="mpt"><b>Elige un número</b><span>Toca un marcador de la imagen para ver qué hace esa capa con el dato.</span></div></div></div></figure>`}
+if(b.k=='sel'){const v=S[id]||[];return`<div id="a${id}">${b.i.map((it,n)=>`<div class="row"><span>${it[0]}</span><select onchange="sv('${id}',${n},this.value)"><option value="">—</option>${b.o.map((o,m)=>`<option value="${m}"${v[n]===String(m)?' selected':''}>${o}</option>`).join('')}</select><em></em></div>`).join('')}<div class="acts"><button class="bt" onclick="ck('${id}')">Comprobar</button><button class="bt s2" onclick="retry('${id}')">↻ Volver a intentarlo</button><b class="sc" aria-live="polite"></b></div></div>`}
+if(b.k=='chk'){const v=S[id]||[];return`<div id="a${id}">${b.o.map((o,n)=>`<label class="chk"><input type="checkbox" ${v.includes(n)?'checked':''} onchange="tg('${id}',${n},this.checked)">${o}</label>`).join('')}<div class="acts"><button class="bt s2" onclick="retry('${id}')">↻ Volver a intentarlo</button></div></div>`}
+if(b.k=='ta')return`<div id="t${id}">${b.f.map((f,n)=>`<label for="x${id}_${n}">${f}</label><textarea id="x${id}_${n}" oninput="S['${id}_${n}']=this.value;sv0()">${esc(S[id+'_'+n]||'')}</textarea>`).join('')}<div class="acts"><button class="bt s2" onclick="cl('${id}')">Borrar respuesta</button></div></div>`;
+return''}
+
+function tr(id){const b=B[id],r=document.getElementById('r'+id),t=document.getElementById('b'+id),o=r.hidden;r.hidden=!o;t.textContent=o?'Ocultar solución':b.b;t.setAttribute('aria-expanded',String(o))}
+function mz(id,n){const b=B[id];let v=S['m'+id]||[];if(!v.includes(n))v.push(n);S['m'+id]=v;sv0();
+const f=document.getElementById('fg'+id);const z=b.z[n],c=z[4]||'#ff7a1a';
+f.querySelectorAll('.mk').forEach((e,i)=>{e.classList.toggle('on',v.includes(i));e.classList.toggle('sel',i===n)});
+const p=document.getElementById('pnl'+id),badge=document.getElementById('pn'+id);
+p.style.borderLeftColor=c;p.classList.add('on');
+badge.style.background=c;badge.textContent=n+1;
+p.querySelector('.mpt').innerHTML='<b>'+z[2]+'</b><span>'+z[3]+'</span>';
+if(window.innerWidth<840&&p.scrollIntoView)p.scrollIntoView({block:'nearest',behavior:'smooth'})}
+function retry(id){delete S[id];sv0();const c=document.getElementById('a'+id);if(!c)return;c.querySelectorAll('select').forEach(e=>e.selectedIndex=0);c.querySelectorAll('input[type=checkbox]').forEach(e=>e.checked=false);c.querySelectorAll('.row').forEach(r=>{r.className='row';const m=r.querySelector('em');if(m)m.textContent=''});const sc=c.querySelector('.sc');if(sc)sc.textContent=''}
+function cl(id){if(!confirm('¿Seguro que quieres borrar esta respuesta? No se puede deshacer.'))return;B[id].f.forEach((f,n)=>{delete S[id+'_'+n];const e=document.getElementById('x'+id+'_'+n);if(e)e.value=''});sv0()}
+function rst(){if(!confirm('Se borrarán las respuestas de los ejercicios autocorregibles, pero se conservan tus textos y notas. ¿Continuar?'))return;D.forEach((d,i)=>d.b.forEach((b,j)=>{if(b.k=='sel'||b.k=='chk'||b.k=='map')delete S[i+'_'+j]}));sv0();draw()}
+function wipe(){if(!confirm('Se borrarán TODOS los ejercicios, textos, notas y el progreso de esta unidad. ¿Continuar?'))return;try{localStorage.removeItem('ud3')}catch(e){}S={v:[]};cur=0;draw();scrollTo(0,0)}
+function sv(id,n,v){S[id]=S[id]||[];S[id][n]=v;sv0()}
+function tg(id,n,c){let a=S[id]||[];a=a.filter(x=>x!==n);if(c)a.push(n);S[id]=a;sv0()}
+function ck(id){const b=B[id],rows=document.querySelectorAll('#a'+id+' .row');let ok=0;const v=S[id]||[];
+rows.forEach((r,n)=>{const g=v[n]===String(b.i[n][1]);if(g)ok++;r.className='row '+(g?'ok':'ko');r.querySelector('em').textContent=(g?'✔ ':'✘ ')+b.i[n][2]});
+document.querySelector('#a'+id+' .sc').textContent=ok+' / '+rows.length+(ok==rows.length?' 🎉':' · revisa las marcadas')}
+function go(i){cur=i;S.cur=i;if(!S.v.includes(i))S.v.push(i);sv0();draw();scrollTo(0,0)}
+function draw(){const d=D[cur];
+document.getElementById('m').innerHTML=`<header class="h"><small>PANTALLA ${cur+1} DE ${D.length}</small><h2>${d.t}</h2><p>${d.s}</p></header>`+
+`<div class="card">${d.b.map((b,j)=>R(b,cur+'_'+j)).join('')}</div>`+
+`<div class="card"><label for="nota">📝 Mis notas</label><textarea id="nota" oninput="S['n${cur}']=this.value;sv0()">${esc(S['n'+cur]||'')}</textarea></div>`+
+`<div class="ctl"><button class="bt s" ${cur?'':'disabled'} onclick="go(${cur-1})">← Anterior</button><button class="bt" ${cur<D.length-1?'':'disabled'} onclick="go(${cur+1})">Siguiente →</button></div>`;
+document.getElementById('mn').innerHTML=D.map((x,i)=>`<button class="${i==cur?'on':''} ${S.v.includes(i)?'v':''}" onclick="go(${i})">${i+1}. ${x.t}</button>`).join('');
+const p=Math.round(S.v.length/D.length*100);document.getElementById('pg').style.width=p+'%';document.getElementById('pt').textContent=p+'% completado'}
+function ex(){let o='UD3 · Sistemas basados en la nube · Taller Mediterráneo · Mis respuestas\n\n';
+D.forEach((d,i)=>{o+='## '+(i+1)+'. '+d.t+'\n';d.b.forEach((b,j)=>{const id=i+'_'+j;
+if(b.k=='ta')b.f.forEach((f,n)=>o+=f+'\n  '+(S[id+'_'+n]||'—')+'\n');
+if(b.k=='chk')o+='Elegidas: '+(S[id]||[]).map(n=>b.o[n]).join(', ')+'\n';
+if(b.k=='sel')b.i.forEach((it,n)=>{const x=(S[id]||[])[n];o+=it[0]+' → '+(x?b.o[x]:'—')+'\n'})});
+o+='Notas: '+(S['n'+i]||'—')+'\n\n'});
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([o],{type:'text/plain'}));a.download='ud3_respuestas.txt';a.click()}
+function exj(){const o={unidad:'UD3',version:1,fecha:new Date().toISOString(),datos:S};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,1)],{type:'application/json'}));a.download='ud3_progreso_'+o.fecha.slice(0,10)+'.json';a.click()}
+function imj(i){const f=i.files[0];i.value='';if(!f)return;if(f.size>1e6){alert('El archivo es demasiado grande para ser un progreso de esta unidad.');return}
+const r=new FileReader();r.onerror=()=>alert('No se pudo leer el archivo.');r.onload=()=>{let o;try{o=JSON.parse(r.result)}catch(e){alert('El archivo no es un JSON válido.');return}
+if(!o||o.unidad!=='UD3'||!o.datos||typeof o.datos!=='object'||Array.isArray(o.datos)){alert('Este archivo no corresponde al progreso de la UD3.');return}
+const d=o.datos,n={v:[]},N=D.length;
+if(Array.isArray(d.v))n.v=[...new Set(d.v.filter(x=>Number.isInteger(x)&&x>=0&&x<N))];
+if(Number.isInteger(d.cur)&&d.cur>=0&&d.cur<N)n.cur=d.cur;
+for(const k in d){const x=d[k];
+if(/^n\d+$/.test(k)||/^\d+_\d+_\d+$/.test(k)){if(typeof x==='string')n[k]=x.slice(0,20000)}
+else if(/^m\d+_\d+$/.test(k)){if(Array.isArray(x)&&x.length<=20)n[k]=x.filter(e=>Number.isInteger(e)&&e>=0&&e<10)}
+else if(/^\d+_\d+$/.test(k)){if(Array.isArray(x)&&x.length<=50)n[k]=x.map(e=>e===null||e===undefined?'':(typeof e==='number'?e:String(e)))}}
+if(!confirm('Se sustituirá el progreso actual de este navegador por el del archivo. ¿Continuar?'))return;
+S=n;cur=S.cur||0;sv0();draw();scrollTo(0,0);alert('Progreso cargado correctamente.')};r.readAsText(f)}
+draw();
+</script>
+</body></html>
